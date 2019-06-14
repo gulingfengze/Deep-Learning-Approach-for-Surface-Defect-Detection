@@ -22,7 +22,8 @@ class Agent(object):
 		elif self.__Param["mode"] is "testing":
 			self.test()
 		elif self.__Param["mode"] is "savePb":
-			raise Exception(" this  mode is incomplete ")
+			#raise Exception(" this  mode is incomplete ")
+			self.save_PbModel()
 		else:
 			print("got a unexpected mode ,please set the mode  'training', 'testing' or 'savePb' ")
 
@@ -85,6 +86,8 @@ class Agent(object):
 				# 	self.valid()
 				self.model.step += 1
 
+	def save_PbModel(self):
+		self.model.save_PbModel()
 
 	def test(self):
 		#anew a floder to save visualization
