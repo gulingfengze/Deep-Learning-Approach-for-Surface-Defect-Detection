@@ -145,6 +145,16 @@ class Model(object):
     #     constant_graph=graph_util.convert_variables_to_constants(self.__session,self.__session.graph_def,["SparseToDense"])
     #     with tf.gfile.GFile(self.__model_path+'Model.pb', mode='wb') as f:
     #         f.write(constant_graph.SerializeToString())
+    def save_PbModel(self):
+        input1_name = "Image"
+        input2_name = "PixelLabel"
+        output_name = "segment/Sigmoid"
+        output_node_names = [input1_name, input2_name, output_name]
+        print("模型保存为pb格式，输入节点name：{}输出节点name: {}".format(input_name, output_name))
+        output_graph_def = tf.graph_util.convert_variables_to_constants(
+        self.__session, self.__session.graph_def, output_node_names)
+        with tf.gfile.GFile("frozen_inference_graph.pb", "wb") as f:
+            f.write(output_graph_def.SerializeToString())
     #def PbModel(self):
         # with gfile.FastGFile('Model.pb', 'rb') as f:
         #     graph_def = tf.GraphDef()
