@@ -78,6 +78,7 @@ class Agent(object):
 							save_dir = "./visualization/training_epoch-{}".format(i)
 							self.visualization(img_batch, label_pixel_batch, mask_batch, file_name_batch,save_dir)
 				self.logger.info('epoch:[{}] ,train_mode:{}, loss: {}'.format(self.model.step, mode,iter_loss))
+				print('epoch:[{}] ,train_mode:{}, loss: {}'.format(self.model.step, mode,iter_loss))
 				#保存模型
 				if i % self.__Param["save_frequency"] == 0 or i==self.__Param["epochs_num"] + self.model.step-1:
 					self.model.save()
